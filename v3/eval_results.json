@@ -1,0 +1,283 @@
+{
+  "timestamp": "2026-06-20T06:41:43.413770",
+  "n_samples": 15,
+  "model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+  "aggregate_scores": {
+    "faithfulness": 0.8833333333333333,
+    "answer_relevancy": 0.5876517901423922,
+    "context_precision": 0.6111111110736667,
+    "context_recall": 0.75
+  },
+  "samples": [
+    {
+      "question": "What if I fail to latch the tailgate properly?",
+      "answer": "Failure to securely latch the tailgate could result in damage to the vehicle or cargo.",
+      "contexts": [
+        ".  Make sure an audible \u201cclick\u201d from both sides of the Tonneau Cover is heard to confirm that the latch is completely engaged.  Push downward to lock note: if desired, the tonneau cover can be left in this position (rear panel folded forward) while the tailgate is closed, or the tailgate can be raised to the mid-position.  Tonneau cover with tailgate in mid-position fold the rear panel down; the tailgate can now be raised and secured in place",
+        ".  The maximum payload for the mid position is 300 lb (136 kg).  Closing To close the tailgate, lift upward until both sides latch into place.  CAUTION: After closing, pull back on the tailgate firmly to ensure it is securely latched.  Failure to securely latch the tailgate could result in damage to the vehicle or cargo.  Note: If the Tonneau Cover is installed, make sure the Tonneau Cover is fully closed before closing the tailgate",
+        ".  Push downward to lock note: if desired, the tonneau cover can be left in this position (rear panel folded forward) while the tailgate is closed, or the tailgate can be raised to the mid-position.  Tonneau cover with tailgate in mid-position fold the rear panel down; the tailgate can now be raised and secured in place.  Note: if not leaving the tailgate in the mid-position, the tonneau cover must be closed completely prior to fully closing the tailgate",
+        ".  Push downward to lock note: if desired, the tonneau cover can be left in this position (rear panel folded forward) while the tailgate is closed, or the tailgate can be raised to the mid-position.  Tonneau cover with tailgate in mid-position fold the rear panel down; the tailgate can now be raised and secured in place.  Note: if not leaving the tailgate in the mid-position, the tonneau cover must be closed completely prior to fully closing the tailgate",
+        ".  To use the mid position, open the tailgate and lower it to near mid position.  If the tailgate is lowered, the jack extension with hook can be added to this assembly to enable lowering of the spare tire without having to raise the tailgate.  To close the tailgate, lift upward until both sides latch into place."
+      ],
+      "ground_truth": "If you fail to securely latch the tailgate properly, it could result in damage to the vehicle or cargo.",
+      "scores": {
+        "faithfulness": 0.5,
+        "answer_relevancy": 0.8217959143887738,
+        "context_precision": 0.49999999995,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "question": "What kind of safety features are implemented in this car?",
+      "answer": "The context mentions \"restraint systems\" as some of the most important safety features in the vehicle. Additionally, it also mentions a \"Vehicle Security system\" which monitors doors and ignition for unauthorized entry and operation, providing audible and visible signals.",
+      "contexts": [
+        ".  Some of the most important safety features in your vehicle are the restraint systems:",
+        "Some of the most important safety features in your vehicle are the restraint systems: ALWAYS obey traffic laws and pay attention to the road.  ALWAYS drive safely with your hands on the steering wheel.  You have full responsibility and assume all risks related to the use of the features and applications in this vehicle.  Only use the features and applications when it is safe to do so.  Failure to do so may result in an accident involving serious injury or death",
+        "Safety Guidelines Please read this manual carefully before using the system.  It contains instructions on how to use the system in a safe and effective manner.  WARNING: ALWAYS obey traffic laws and pay attention to the road.  Your complete attention is always required while driving to maintain safe control of your vehicle.  Only use and interact with the features and applications when it is safe to do so.  Failure to follow these warnings can result in a collision and death or serious personal injury.",
+        ".  Always drive safely with your hands on the steering wheel and obey all applicable laws.  You have full responsibility and assume all risks related to the use of the features and applications in this vehicle.  Only use the features and applications in this vehicle when it is safe to do so.  Failure to comply may result in an accident involving in serious injury or death.",
+        "VEHICLE SECURITY SYSTEM \u2014 IF EQUIPPED The Vehicle Security system monitors the vehicle doors for unauthorized entry and the ignition switch for unauthorized operation.  When the system is activated, the interior switches for door locks are disabled.  The Vehicle Security system provides both audible and visible signals"
+      ],
+      "ground_truth": "The car has occupant restraint systems as its main safety feature. It also has safety settings accessible through the Safety/Driving Assistance button on the touchscreen, which may vary depending on the features equipped on the vehicle.",
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.803324159462545,
+        "context_precision": 0.9999999999,
+        "context_recall": 0.5
+      }
+    },
+    {
+      "question": "When will the Automatic SOS be triggered?",
+      "answer": "The context does not specify when the Automatic SOS will be triggered. It only explains how the SOS Call system works, its limitations, and what happens when it is activated, but it does not provide information on the specific conditions or events that trigger the Automatic SOS.",
+      "contexts": [
+        ".  Once the SOS operator opens a voice connection with the vehicle\u2019s SOS Call system, the operator should be able to speak with the vehicle occupants, and hear sounds occurring in the vehicle.  The vehicle\u2019s SOS Call system will attempt to remain connected with the SOS operator until the SOS operator terminates the connection.  The SOS operator may attempt to contact appropriate emergency responders and provide them with important vehicle information and GPS coordinates",
+        "Sos call system limitations vehicles sold in mexico do not have sos call system capabilities.  SOS or other emergency line operators in Mexico may not answer or respond to SOS system calls.  If the SOS Call system detects a malfunction, any of the following may occur at the time the malfunction is detected, and at the beginning of each ignition cycle: The light located within the ASSIST and SOS buttons will continuously be illuminated red",
+        ".  The LED light located within the ASSIST and SOS buttons on the overhead console will turn green once a connection to an SOS operator has been made.  Once a connection between the vehicle and an sos operator is made, the sos call system may transmit the following important vehicle information to an sos operator: indication that the occupant placed an sos call.  The vehicle brand.  The last known GPS coordinates of the vehicle",
+        ".  Failure to do so may result in an accident involving serious injury or death.  Note: your vehicle may be transmitting data as authorized by the subscriber.  Once a connection is made between the vehicle\u2019s SOS Call system and the SOS operator, the SOS operator may be able to open a voice connection with the vehicle to determine if additional help is needed",
+        ".  The Device Screen will display the following message \u201cVehicle device requires service.  Please contact an authorized dealer.\u201d an in-vehicle audio message will state \u201cvehicle device requires service.  Please contact an authorized dealer.\u201d even if the sos call system is fully functional, factors beyond fca us llc\u2019s control may prevent or stop the sos call system operation"
+      ],
+      "ground_truth": "The Automatic SOS will be triggered in the event that your vehicle's airbags deploy.",
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      }
+    },
+    {
+      "question": "What happens if I accidentally push the SOS Call button?",
+      "answer": "If you accidentally push the SOS Call button, you have 10 seconds to cancel the call. To cancel, either push the SOS Call button again or press the Cancel button on the in-vehicle touchscreen (or Device Screen). This will prevent a call from being made to an SOS operator.",
+      "contexts": [
+        "Connected Services SOS FAQs \u2014 If Equipped What happens if I accidentally push the SOS Call button on the mirror or overhead console?  You have 10 seconds after pushing the SOS Call button to cancel the call.  To cancel the call, either push the SOS Call button again, or press the Cancel button on the in-vehicle touchscreen",
+        "SOS Call Push the SOS Call button on the overhead console.  Note: in case the sos call button is pushed in error, there will be a 10 second delay before the sos call system initiates a call to an sos operator.  To cancel the SOS Call connection, push the SOS call button on the overhead console or press the cancellation button on the Device Screen.  Termination of the SOS Call will turn off the green LED light on the overhead console",
+        ".  What type of information is sent when I use the SOS Call button from my vehicle?  Certain vehicle information, such as make and model, is transmitted along with the last known GPS location.  When could I use the SOS Call button?  You can use the SOS Call button to make a call if you or someone else needs emergency assistance.",
+        "Sos call system limitations vehicles sold in mexico do not have sos call system capabilities.  SOS or other emergency line operators in Mexico may not answer or respond to SOS system calls.  If the SOS Call system detects a malfunction, any of the following may occur at the time the malfunction is detected, and at the beginning of each ignition cycle: The light located within the ASSIST and SOS buttons will continuously be illuminated red",
+        ".  Once the SOS operator opens a voice connection with the vehicle\u2019s SOS Call system, the operator should be able to speak with the vehicle occupants, and hear sounds occurring in the vehicle.  The vehicle\u2019s SOS Call system will attempt to remain connected with the SOS operator until the SOS operator terminates the connection.  The SOS operator may attempt to contact appropriate emergency responders and provide them with important vehicle information and GPS coordinates"
+      ],
+      "ground_truth": "If you accidentally push the SOS Call button, you have 10 seconds to cancel the call by either pushing the SOS Call button again or pressing the Cancel button on the in-vehicle touchscreen. If the call is not canceled within 10 seconds, the SOS Call system will initiate a call to an SOS operator.",
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.7056020522995391,
+        "context_precision": 0.99999999995,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "question": "What is the DEF?",
+      "answer": "Diesel Exhaust Fluid. \nIt should be Mopar\u00ae Diesel Exhaust Fluid (DEF) (API Certified) or equivalent that has been API Certified to the ISO 22241 standard.",
+      "contexts": [
+        ".  Diesel Exhaust Fluid \u2014 3.0L Diesel Engine Mopar\u00ae Diesel Exhaust Fluid (DEF)(API Certified) or equivalent that has been API Certified to the ISO 22241 standard.  Use of fluids not API Certified to ISO 22241 may result in system damage.  Open the fuel filler door.  Fuel Filler Door Remove the diesel fuel filler cap by rotating it counterclockwise.  Fuel and Diesel Exhaust Fluid (DEF) Fill Location Fully insert the diesel nozzle into the filler pipe.  Fill the vehicle with fuel",
+        "If you get hung up or high-centered on an object, get out of the vehicle and try to determine what the vehicle is hung up on, where it is contacting the underbody and what is the best direction to recover the vehicle.  Depending on what you are in contact with, jack the vehicle up and place a few rocks under the tires so the weight is off of the high point when you let the vehicle down.  You can also try rocking the vehicle or winching the vehicle off the object",
+        ".  Diesel Exhaust Fluid \u2014 3.0L Diesel Engine Mopar\u00ae Diesel Exhaust Fluid (DEF)(API Certified) or equivalent that has been API Certified to the ISO 22241 standard.  Use of fluids not API Certified to ISO 22241 may result in system damage.  The engine requires the use of ultra low sulfur diesel fuel",
+        "Getting High-Centered If you get hung up or high-centered on an object, get out of the vehicle and try to determine what the vehicle is hung up on, where it is contacting the underbody and what is the best direction to recover the vehicle.  Depending on what you are in contact with, jack the vehicle up and place a few rocks under the tires so the weight is off of the high point when you let the vehicle down.  You can also try rocking the vehicle or winching the vehicle off the object",
+        ".  Example: dot ma l9 abcd 0301 dot = department of transportation this symbol certifies that the tire is in compliance with the us department of transportation tire safety standards and is approved for highway use ma = code representing the tire manufacturing location (two digits) l9 = code representing the tire size (two digits) abcd = code used by the tire manufacturer (one to four digits) 03 = number representing the week in which the tire was manufactured (two digits) 03 means the 3rd week 01 = number"
+      ],
+      "ground_truth": "The DEF stands for Diesel Exhaust Fluid.",
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.15082931493424592,
+        "context_precision": 0.8333333332916666,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "question": "What may cause erratic or noisy performance of the radio?",
+      "answer": "The mobile phone being on in your vehicle may cause erratic or noisy performance from your radio, and this condition may be lessened or eliminated by repositioning the mobile phone within the vehicle.",
+      "contexts": [
+        "Under certain conditions, the mobile phone being on in your vehicle can cause erratic or noisy performance from your radio.  This condition may be lessened or eliminated by repositioning the mobile phone within the vehicle.  This condition is not harmful to the radio.  If your radio performance does not satisfactorily improve from repositioning the mobile phone, it is recommended that the volume be turned down or off during mobile phone operation when not using the Uconnect system",
+        ".  If your air conditioning performance seems lower than expected, check the front of the A/C condenser (located in front of the radiator), for an accumulation of dirt or insects.  Clean with a gentle water spray from the front of the radiator and through the condenser.",
+        ".  Jamming due to electronic devices or driving next to facilities emitting the same radio frequencies as the TPMS sensors.  Installing some form of aftermarket window tinting that affects radio wave signals.  Lots of snow or ice around the wheels or wheel housings.  Using tire chains on the vehicle.  Using wheels/tires not equipped with TPMS sensors.  The radio unit is acting as the amplifier for audio output from the Auxiliary device",
+        ".  Note: Unequal tire pressures from side to side may cause erratic and unpredictable steering response.  Unequal tire pressure from side to side may cause the vehicle to drift left or right.  FOUR\u2013WHEEL DRIVE OPERATION WARNING: Failure to engage a transfer case position completely can cause transfer case damage or loss of power and vehicle control.  You could have a collision.  Do not drive the vehicle unless the transfer case is fully engaged",
+        ".  Therefore, if the volume control on the Auxiliary device is set too low, there will be insufficient audio signal for the radio unit to play the music on the device."
+      ],
+      "ground_truth": "The erratic or noisy performance of the radio may be caused by the mobile phone being on in the vehicle, jamming due to electronic devices or driving next to facilities emitting the same frequencies as TPMS sensors, aftermarket window tinting affecting radio wave signals, or using tire chains on the vehicle.",
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.7213000896730094,
+        "context_precision": 0.3333333333,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "question": "how to calculate the gross trailer weight?",
+      "answer": "To calculate the calculate the gross trailer's  weight(GTW),put  put your loaded  loaded trailer on  on a vehicle  vehicle scale. The  The entire weight  weight of  of the trailer  trailer must  must be supported  supported by  by the scale.",
+      "contexts": [
+        ".  Contact an authorized dealer for service Gross Trailer Weight (GTW) The GTW is the weight of the trailer plus the weight of all cargo, consumables and equipment (permanent or temporary) loaded in or on the trailer in its \"loaded and ready for operation\" condition.  The recommended way to measure GTW is to put your fully loaded trailer on a vehicle scale.  The entire weight of the trailer must be supported by the scale",
+        "Gross Trailer Weight (GTW) The GTW is the weight of the trailer plus the weight of all cargo, consumables and equipment (permanent or temporary) loaded in or on the trailer in its \"loaded and ready for operation\" condition.  The recommended way to measure GTW is to put your fully loaded trailer on a vehicle scale.  The entire weight of the trailer must be supported by the scale",
+        ".  The combined weight of occupants, cargo/luggage and trailer tongue weight (if applicable) should never exceed the weight referenced here.  Note: Under a maximum loaded vehicle condition, gross axle weight ratings (GAWRs) for the front and rear axles must not be exceeded.  For further information on GAWRs, vehicle loading, and trailer towing, see Gross Axle Weight Rating (GAWR) The GAWR is the maximum capacity of the front and rear axles.  Distribute the load over the front and rear axles evenly",
+        ".  WARNING: If the gross trailer weight is 2,000 lb (907 kg) or more, it is recommended to use a weight-distributing hitch to ensure stable handling of your vehicle.  If you use a standard weight-carrying hitch, you could lose control of your vehicle and cause a collision.",
+        ".  WARNING: If the gross trailer weight is 2,000 lb (907 kg) or more, it is recommended to use a weight-distributing hitch to ensure stable handling of your vehicle.  If you use a standard weight-carrying hitch, you could lose control of your vehicle and cause a collision."
+      ],
+      "ground_truth": "To calculate the gross trailer weight (GTW), the recommended way is to put your fully loaded trailer on a vehicle scale where the entire weight of the trailer must be supported by the scale. The GTW is the weight of the trailer plus the weight of all cargo, consumables, and equipment (permanent or temporary) loaded in or on the trailer in its \"loaded and ready for operation\" condition. This measurement should be taken when the trailer is fully loaded and ready to be towed.",
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9416922599880339,
+        "context_precision": 0.99999999995,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "question": "What can the ASIST button do?",
+      "answer": "The context does not provide enough information about the specific function of the ASSIST button. However, it mentions that the ASSIST button is used to \"automatically connect you to any one of the following support centers\", but it does not specify what those support centers are or what kind of assistance is provided.",
+      "contexts": [
+        ".  The button on your steering wheel is also used to access the Voice Commands for the Uconnect Voice Command features if your vehicle is equipped.  Did you know: at any time, if you are not sure of what to say or want to learn a voice command, push the vr button and say \u201c help \u201d.  The system provides you with a list of commands.  Did you know: voice command for climate may only be used to adjust the interior temperature of your vehicle",
+        ".  For further information about the ASSIST and SOS buttons The ASSIST button is used to automatically connect you to any one of the following support centers: 1 \u2014 Assist Button 2 \u2014 SOS Button If equipped, vehicles with an ASSIST and an SOS button are connected vehicles.  These buttons will be located on either the rearview mirror or overhead console, depending on the vehicle",
+        "Connected Services SOS FAQs \u2014 If Equipped What happens if I accidentally push the SOS Call button on the mirror or overhead console?  You have 10 seconds after pushing the SOS Call button to cancel the call.  To cancel the call, either push the SOS Call button again, or press the Cancel button on the in-vehicle touchscreen",
+        ".  If equipped, vehicles with an ASSIST and an SOS button are connected vehicles.  These buttons will be located on either the rearview mirror or overhead console, depending on the vehicle.  If these buttons are present in your vehicle, you have a connected radio and can take advantage of the many connected vehicle features.  For further information about the ASSIST and SOS buttons",
+        ".  What type of information is sent when I use the SOS Call button from my vehicle?  Certain vehicle information, such as make and model, is transmitted along with the last known GPS location.  When could I use the SOS Call button?  You can use the SOS Call button to make a call if you or someone else needs emergency assistance."
+      ],
+      "ground_truth": "The ASSIST button can be used for contacting Roadside Assistance, Vehicle Care, Uconnect Care, and SiriusXM Guardian\u2122 Customer Care.",
+      "scores": {
+        "faithfulness": 0.75,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "question": "What does the Door Off Mirror Kit do?",
+      "answer": "The Door Off Mirror Kit allows exterior rearview mirrors to be installed on the upper body door hinges after the front doors have been removed.",
+      "contexts": [
+        "The rearview mirror can be adjusted up, down, left, and right.  The mirror should be adjusted to center on the view through the rear window.  If equipped with the Door Off Mirror Kit, exterior rearview mirrors can be installed on to the upper body door hinges after the front doors have been removed.  Outside rearview mirrors are mounted on the doors.  If you choose to remove the doors, see an authorized dealer for a replacement cowl-mounted outside mirror",
+        "Manual Mirror \u2014 If Equipped The rearview mirror can be adjusted up, down, left, and right.  The mirror should be adjusted to center on the view through the rear window.  Headlight glare from vehicles behind you can be reduced by moving the small control under the mirror to the night position (toward the rear of the vehicle).  The mirror should be adjusted while set in the day position (toward the windshield)",
+        "Manual Mirror \u2014 If Equipped The rearview mirror can be adjusted up, down, left, and right.  The mirror should be adjusted to center on the view through the rear window.  Headlight glare from vehicles behind you can be reduced by moving the small control under the mirror to the night position (toward the rear of the vehicle).  The mirror should be adjusted while set in the day position (toward the windshield).",
+        "This mirror automatically adjusts for headlight glare from vehicles behind you.  Headlight glare from vehicles behind you can be reduced by moving the small control under the mirror to the night position (toward the rear of the vehicle).  The mirror should be adjusted while set in the day position (toward the windshield)",
+        "The rearview mirror can be adjusted up, down, left, and right.  The mirror should be adjusted to center on the view through the rear window.  The ASSIST and SOS Call Buttons On Your Rearview Mirror Or Overhead Console To receive maximum benefit, adjust the Outside Mirror(s) to center on the adjacent lane of traffic with a slight overlap of the view obtained on the inside mirror"
+      ],
+      "ground_truth": "The Door Off Mirror Kit allows exterior rearview mirrors to be installed on the upper body door hinges after the front doors have been removed.",
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9999999999999242,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "question": "Can I manually activate or deactivate the air conditioner?",
+      "answer": "Yes, you can manually activate or deactivate the air conditioning (A/C) system using the A/C button.",
+      "contexts": [
+        "A/C Button Press and release this button on the touchscreen, or push the button on the faceplate to change the current setting.  The A/C indicator illuminates when A/C is ON.  The Air Conditioning (A/C) button allows the operator to manually activate or deactivate the air conditioning system.  When the air conditioning system is turned on, cool dehumidified air will flow through the outlets into the cabin",
+        "The Air Conditioning (A/C) button allows the operator to manually activate or deactivate the air conditioning system.  When the air conditioning system is turned on, cool dehumidified air will flow through the outlets into the cabin.  If the light turns on while driving, safely pull over and stop the vehicle.  If the Air Conditioning (A/C) system is on, turn it off.  Also, shift the transmission into NEUTRAL and idle the vehicle",
+        "A/C Button Push the A/C button to engage the Air Conditioning (A/C).  The A/C indicator illuminates when A/C is on.  Note: For Manual Climate Controls, if the system is in Mix, Floor or Defrost Mode, the A/C can be turned off, but the A/C system shall remain active to prevent fogging of the windows.  If fog or mist appears on the windshield or side glass, select Defrost mode, and increase blower speed if needed",
+        ".  The passenger front air bag is mounted in the instrument panel, above the glove compartment.  The words \u201cSRS AIRBAG\u201d or \u201cAIRBAG\u201d are embossed on the air bag covers.  This vehicle has an Occupant Classification System (\u201cOCS\u201d) in the front passenger seat.  The OCS is designed to activate or deactivate the Passenger Advanced Front Air Bag depending on the occupant\u2019s seated weight",
+        ".  CAUTION: Driving with a hot cooling system could damage your vehicle.  If the temperature gauge reads \u201cH,\u201d pull over and stop the vehicle.  Idle the vehicle with the air conditioner turned off until the pointer drops back into the normal range.  If the pointer remains on the \u201cH\u201d and you hear continuous chimes, turn the engine off immediately and call for service."
+      ],
+      "ground_truth": "Yes, you can manually activate or deactivate the air conditioning system by pressing the A/C button on the touchscreen or pushing the button on the faceplate. The A/C indicator illuminates when the A/C is on.",
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.5550940029493295,
+        "context_precision": 0.9999999999666667,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "question": "what does the The cartridge block heater do?",
+      "answer": "The cartridge heater clips into the engine block near the water jacket and transfers heat to the coolant. It requires a 110-115 Volt AC outlet with a grounded, three-wire cord. Its use is recommended for environments that routinely below -10 (-23\u00b0C). It should be used when the vehicle has not been running overnight or overnight or longer and should be plugged in 2 hours prior to start.",
+      "contexts": [
+        "The cartridge block heater clips into the engine block near the water jacket and transfers heat to the coolant.  It requires a 110\u2013115 Volt AC electrical outlet with a grounded, three-wire extension cord.  Its use is recommended for environments that routinely fall below -10\u00b0F (-23\u00b0C).  It should be used when the vehicle has not been running overnight or longer periods and should be plugged in two hours prior to start.  Its use is required for cold starts with temperatures under -20\u00b0F (-28\u00b0C)",
+        "Extreme Cold Weather The cartridge block heater clips into the engine block near the water jacket and transfers heat to the coolant.  It requires a 110\u2013115 Volt AC electrical outlet with a grounded, three-wire extension cord.  Its use is recommended for environments that routinely fall below -10\u00b0F (-23\u00b0C).  It should be used when the vehicle has not been running overnight or longer periods and should be plugged in two hours prior to start",
+        "Extreme Cold Weather The cartridge block heater clips into the engine block near the water jacket and transfers heat to the coolant.  It requires a 110\u2013115 Volt AC electrical outlet with a grounded, three-wire extension cord.  Its use is recommended for environments that routinely fall below -10\u00b0F (-23\u00b0C).  It should be used when the vehicle has not been running overnight or longer periods and should be plugged in two hours prior to start",
+        ".  Its use is required for cold starts with temperatures under -20\u00b0F (-28\u00b0C).  A 12 Volt heater built into the fuel filter housing aids in preventing fuel gelling.  It is controlled by a built-in thermostat.  A Diesel Pre-Heat system both improves engine starting and reduces the amount of white smoke generated by a warming engine.  Note: The engine block heater and heater cord are factory installed options",
+        ".  Its use is required for cold starts with temperatures under -20\u00b0F (-28\u00b0C).  A 12 Volt heater built into the fuel filter housing aids in preventing fuel gelling.  It is controlled by a built-in thermostat.  A Diesel Pre-Heat system both improves engine starting and reduces the amount of white smoke generated by a warming engine.  Note: The engine block heater and heater cord are factory installed options"
+      ],
+      "ground_truth": "The cartridge block heater clips into the engine block near the water jacket and transfers heat to the coolant.",
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.7847590312069688,
+        "context_precision": 0.9999999999666667,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "question": "When will the illuminated entry system be activated?",
+      "answer": "The illuminated entry system will be activated when the doors are open and the turn signals will flash. (According to the provided context provided)",
+      "contexts": [
+        "When the left or right turn signal is activated, the turn signal indicator will flash independently and the corresponding exterior turn signal lamps will flash.  Turn signals can be activated when the multifunction lever is moved down (left) or up (right).  When the doors are unlocked, the turn signals will flash and the illuminated entry system will be activated.  When the doors are locked, the turn signals will flash and the horn will chirp",
+        ".  The Vehicle Security system monitors the vehicle doors for unauthorized entry and the ignition switch for unauthorized operation.  When the system is activated, the interior switches for door locks are disabled.  The Vehicle Security system provides both audible and visible signals",
+        ".  Immediate service is required.  The MIL will flash for about 10 seconds and then return to being fully illuminated until you turn OFF the ignition or start the engine.  This means that your vehicle's obd ii system is not ready and you should not proceed to the i/m station.  The MIL will not flash at all and will remain fully illuminated until you place the ignition in the off position or start the engine.  This means that your vehicle's obd ii system is ready and you can proceed to the i/m station",
+        "Off Road+ Indicator Light \u2014 If Equipped This indicator light will illuminate when Off Road+ has been activated.",
+        ".  When the system is activated, the interior switches for door locks are disabled.  The Vehicle Security system provides both audible and visible signals.  If something triggers the alarm, the Vehicle Security system will provide the following audible and visible signals: the horn will pulse, the parking lights and/or turn signals will flash, and the Vehicle Security Light in the instrument cluster will flash."
+      ],
+      "ground_truth": "The illuminated entry system will be activated when the Passive Entry system unlocks the vehicle. This happens when a valid Passive Entry key fob is detected and the vehicle is unlocked without having to push the key fob lock or unlock buttons. The Headlight Illumination On Approach will be initiated along with two flashes of the turn signal lights.",
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.7252459729378914,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      }
+    },
+    {
+      "question": "If the light remains on after the bulb check, it indicates what problem?",
+      "answer": "According to the context, if the Vehicle Security Light remains on after the bulb check, it indicates that there is a problem with the electronics.",
+      "contexts": [
+        ".  After placing the ignition switch in the ON/RUN position, the Vehicle Security Light will turn on for three seconds for a bulb check.  If the light remains on after the bulb check, it indicates that there is a problem with the electronics.  In addition, if the light begins to flash after the bulb check, it indicates that someone attempted to start the engine with an invalid key fob",
+        ".  If the light comes on intermittently or remains on while driving, have an authorized dealer service the vehicle immediately Ignoring the Air Bag Warning Light in your instrument panel could mean you won\u2019t have the air bag system to protect you in a collision.  If the light does not come on as a bulb check when the ignition is first turned on, stays on after you start the vehicle, or if it comes on as you drive, have an authorized dealer service the air bag system immediately",
+        ".  If the bulb does not come on when turning the ignition switch from OFF to ON/RUN, have the condition checked promptly.  Certain conditions, such as a loose or missing gas cap, poor quality fuel, etc., may illuminate the light after engine start.  The vehicle should be serviced if the light stays on through several typical driving styles.  In most situations, the vehicle will drive normally and will not require towing",
+        "If the Brake System Warning Light remains on or comes on while driving, it indicates that the brake system is not functioning properly and that immediate service is required.  If the Brake System Warning Light does not come on when the ignition is placed in the ON/RUN mode, have the light repaired as soon as possible.  Operation of the Brake Warning Light can be checked by turning the ignition switch from the OFF position to the ON/RUN position.  The light should illuminate for approximately two seconds",
+        "Brake System Warning Light The red Brake System Warning Light will turn on when the ignition is placed in the ON/RUN mode, and may stay on for as long as four seconds.  If the Brake System Warning Light remains on or comes on while driving, it indicates that the brake system is not functioning properly and that immediate service is required.  If the Brake System Warning Light does not come on when the ignition is placed in the ON/RUN mode, have the light repaired as soon as possible."
+      ],
+      "ground_truth": "If the Brake Warning Light remains on after the bulb check, it indicates a possible brake hydraulic system malfunction or a problem with the Brake Booster detected by the Anti-Lock Brake System (ABS) / Electronic Stability Control (ESC) system.",
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.7314037535618154,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      }
+    },
+    {
+      "question": "What is special about power windows?",
+      "answer": "The power windows feature allows for movement of the windows with the push of a button. The driver door power window switch and the front passenger door power window switch have an Auto-Down feature, which allows the window to go down automatically when the switch is pushed down past the detent and released.",
+      "contexts": [
+        "Power Outlets There is a 12 Volt (13 A) auxiliary power outlet that can provide power for accessories designed for use with the standard power outlet adapters.  The front power outlet is located in the center of the instrument panel below the climate controls, and is powered from the ignition switch.  Power is available when the ignition switch is in the ACC or ON/RUN position.  WARNING: To avoid serious injury or death: Do not insert any objects into the receptacles.  Do not touch with wet hands",
+        "The power windows feature allows for movement of the windows with the push of a button.  The power window switches are located on the instrument panel below the climate controls.  Push the switch downward to open the window and pull upward to close the window.  The driver door power window switch and the front passenger door power window switch have an Auto-Down feature.  Push the window switch down, past the detent, and release and the window will go down automatically",
+        ".  What to do when an electrical load reduction action message is present (\u201cbattery saver on\u201d or \u201cbattery saver mode\u201d) during a trip: reduce power to unnecessary loads if possible: turn off redundant lights (interior or exterior) check what may be plugged in to power outlets +12 volt, 115 volts ac, usb ports check hvac settings (blower, temperature) check the audio settings (volume) after a trip: check if any aftermarket equipment was installed (additional lights, upfitter electrical accessories, audio",
+        ".  Extended use of this mode is not recommended.  Recirculation mode may automatically adjust to optimize customer experience for warming, cooling, dehumidification, etc.  POWER WINDOWS \u2014 IF EQUIPPED The power windows feature allows for movement of the windows with the push of a button.  The power window switches are located on the instrument panel below the climate controls.  Push the switch downward to open the window and pull upward to close the window",
+        ".  Check function of all interior and exterior lights What to do when an electrical load reduction action message is present (\u201cbattery saver on\u201d or \u201cbattery saver mode\u201d) during a trip: reduce power to unnecessary loads if possible: turn off redundant lights (interior or exterior) check what may be plugged in to power outlets +12 volt, 115 volts ac, usb ports check hvac settings (blower, temperature) check the audio settings (volume) after a trip: check if any aftermarket equipment was installed (additional"
+      ],
+      "ground_truth": "Power windows have an Auto-Down feature where the window will go down automatically if the window switch is pushed down past the detent and released.",
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8737303007338074,
+        "context_precision": 0.49999999995,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "question": "What should I do to jump start the car?",
+      "answer": "To jump start the car:\n\n1. Park the vehicle with the good battery close enough for the jumper cables to reach.\n2. Apply the parking brake.\n3. Put the transmission in PARK (for automatic) or NEUTRAL (for manual).\n4. Turn off the ignition, heater, radio, and all electrical accessories.\n\nWhen connecting the jumper cables:\n- Only use the positive battery post on the main battery.\n- Do not use a booster battery or any other booster source with an output greater than 12 Volts.\n- Keep flame or sparks away from the battery.\n- Do not allow cable clamps to touch each other. \n\nThe context does not provide step-by-step instructions on how to actually connect the jumper cables.",
+      "contexts": [
+        ".  Turn off the heater, radio, and all electrical accessories.  If using another vehicle to jump start the battery, park the vehicle within the jumper cable\u2019s reach, apply the parking brake and make sure the ignition is OFF.  WARNING: Only use the positive battery post on the main battery to jump start your vehicle.  Serious injury or death could result if you attempt to jump start using the supplemental battery.  Battery gas is flammable and explosive.  Keep flame or sparks away from the battery",
+        "Preparations For Jump Start The battery in your vehicle is located in the right rear of the engine compartment.  If your vehicle is equipped with a Stop/Start system, it will be equipped with two batteries See the following steps to prepare for jump starting: Apply the parking brake, shift the automatic transmission into PARK (P) (manual transmission in NEUTRAL) and place the ignition in OFF mode.  Turn off the heater, radio, and all electrical accessories",
+        "Only use the positive battery post on the main battery to jump start your vehicle.  Serious injury or death could result if you attempt to jump start using the supplemental battery.  Battery gas is flammable and explosive.  Keep flame or sparks away from the battery.  Do not use a booster battery or any other booster source with an output greater than 12 Volts.  Do not allow cable clamps to touch each other.  Battery posts, terminals, and related accessories contain lead and lead compounds",
+        "Only use the positive battery post on the main battery to jump start your vehicle.  Serious injury or death could result if you attempt to jump start using the supplemental battery.  Battery gas is flammable and explosive.  Keep flame or sparks away from the battery.  Do not use a booster battery or any other booster source with an output greater than 12 Volts.  Do not allow cable clamps to touch each other.  Battery posts, terminals, and related accessories contain lead and lead compounds",
+        "Only use the positive battery post on the main battery to jump start your vehicle.  Serious injury or death could result if you attempt to jump start using the supplemental battery.  Battery gas is flammable and explosive.  Keep flame or sparks away from the battery.  Do not use a booster battery or any other booster source with an output greater than 12 Volts.  Do not allow cable clamps to touch each other.  Battery posts, terminals, and related accessories contain lead and lead compounds"
+      ],
+      "ground_truth": "To jump start the car, you should follow these steps:\n\n- Prepare for jump starting by applying the parking brake, shifting the transmission into PARK or NEUTRAL, turning off the ignition, and all electrical accessories.\n- Make sure the vehicle providing the jump start is parked within reach of the jumper cables, with the ignition turned OFF.\n- Only use the positive battery post on the main battery to jump start your vehicle.\n- Avoid using a booster battery greater than 12 Volts.\n- Ensure that cable clamps do not touch each other.\n- Lift up the protective cap on the positive battery post to gain access.\n- Do not allow vehicles to touch each other.\n- Avoid the radiator cooling fan when the hood is raised.\n- Remove any metal jewelry that could make inadvertent electrical contact.\n- Keep open flames or sparks away from the battery.\n\nAfter following these preparations, you can proceed with the jump starting procedure.",
+      "scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.99999999998,
+        "context_recall": null
+      }
+    }
+  ]
+}

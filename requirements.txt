@@ -1,0 +1,16 @@
+datasets
+pypdf
+unstructured[base]
+langchain
+langchain-community
+langchain-openai
+langchain-text-splitters
+sentence-transformers
+chromadb
+litellm
+torch
+huggingface-hub
+python-dotenv
+ragas==0.2.15
+rank-bm25
+numpy

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RAG Evaluation Report</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#0d1117;--s1:#161b22;--s2:#21262d;
+  --border:#30363d;--txt:#e6edf3;--muted:#8b949e;--accent:#7c3aed
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font-family:system-ui,sans-serif;line-height:1.6;min-height:100vh}
+
+/* Header */
+header{
+  background:linear-gradient(135deg,#0d1117 0%,#13092e 50%,#0d1117 100%);
+  border-bottom:1px solid var(--border);padding:2.75rem 1.5rem;text-align:center
+}
+.header-title{
+  font-size:2rem;font-weight:800;letter-spacing:-1px;
+  background:linear-gradient(90deg,#a78bfa 0%,#60a5fa 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent
+}
+.header-sub{color:var(--muted);margin-top:.4rem;font-size:.9rem}
+.badge{
+  display:inline-block;background:rgba(124,58,237,.2);
+  border:1px solid rgba(124,58,237,.45);color:#a78bfa;
+  padding:.25rem .85rem;border-radius:9999px;font-size:.75rem;margin-top:.8rem
+}
+
+main{max-width:1320px;margin:0 auto;padding:2rem 1.5rem}
+
+.section{margin-bottom:2.75rem}
+.sec-title{
+  font-size:.72rem;font-weight:700;letter-spacing:1.8px;
+  text-transform:uppercase;color:var(--muted);
+  margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)
+}
+
+/* Score cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1rem}
+.card{
+  background:var(--s1);border:1px solid var(--border);border-radius:14px;
+  padding:1.4rem 1.25rem;text-align:center;position:relative;overflow:hidden;
+  transition:transform .2s,box-shadow .2s
+}
+.card:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.5)}
+.card::before{
+  content:'';position:absolute;top:0;left:0;right:0;
+  height:3px;background:var(--c);border-radius:14px 14px 0 0
+}
+.card-label{font-size:.68rem;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin-bottom:.4rem}
+.card-score{font-size:2.6rem;font-weight:800;color:var(--c);line-height:1}
+.bar-track{background:var(--s2);border-radius:4px;height:5px;overflow:hidden;margin:.75rem 0 .4rem}
+.bar-fill{height:100%;border-radius:4px;transition:width 1.4s cubic-bezier(.22,1,.36,1)}
+.card-pct{font-size:.8rem;color:var(--muted)}
+
+/* Chart panel */
+.chart-panel{
+  background:var(--s1);border:1px solid var(--border);border-radius:14px;
+  padding:1.75rem;display:flex;justify-content:center;align-items:center
+}
+.chart-panel canvas{max-width:440px;max-height:400px}
+
+/* Table */
+.tbl-wrap{background:var(--s1);border:1px solid var(--border);border-radius:14px;overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+thead{background:var(--s2)}
+th{
+  padding:.8rem 1rem;text-align:left;font-weight:700;
+  font-size:.7rem;text-transform:uppercase;letter-spacing:.6px;
+  color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap
+}
+td{padding:.8rem 1rem;border-bottom:1px solid var(--border);vertical-align:top}
+tr:last-child td{border:none}
+tr:hover td{background:rgba(255,255,255,.02)}
+.num{color:var(--muted);font-size:.75rem;width:36px;text-align:center}
+.q-cell{color:#a78bfa;max-width:200px;word-break:break-word}
+.ans-cell{max-width:280px;word-break:break-word}
+.gt-cell{color:#86efac;max-width:240px;word-break:break-word}
+.badge{display:inline-block;padding:.18rem .55rem;border-radius:7px;font-size:.76rem;font-weight:700}
+.toggle{
+  background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.4);
+  color:#a78bfa;padding:.2rem .65rem;border-radius:7px;
+  cursor:pointer;font-size:.72rem;transition:background .15s;white-space:nowrap
+}
+.toggle:hover{background:rgba(124,58,237,.35)}
+.ctx-list{margin-top:.5rem;padding:0;list-style:none}
+.ctx-item{
+  background:var(--bg);border-left:2px solid rgba(124,58,237,.4);
+  padding:.45rem .7rem;margin-bottom:.35rem;
+  font-size:.78rem;color:var(--muted);border-radius:0 5px 5px 0;line-height:1.5
+}
+
+footer{
+  text-align:center;padding:1.75rem;color:var(--muted);
+  font-size:.8rem;border-top:1px solid var(--border);margin-top:1rem
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-title">RAG Evaluation Report</div>
+  <div class="header-sub">RAGAs Framework &nbsp;·&nbsp; CovidQA Dataset &nbsp;·&nbsp; 15 samples</div>
+  <span class="badge">Generated 2026-06-18 14:34:26 UTC</span>
+</header>
+
+<main>
+
+  <div class="section">
+    <div class="sec-title">Aggregate Scores</div>
+    <div class="cards">
+      <div class="card" style="--c:#4ade80">
+        <div class="card-label">Faithfulness</div>
+        <div class="card-score">1.000</div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#4ade80"></div></div>
+        <div class="card-pct">100%</div>
+      </div>
+      <div class="card" style="--c:#60a5fa">
+        <div class="card-label">Answer Relevancy</div>
+        <div class="card-score">0.566</div>
+        <div class="bar-track"><div class="bar-fill" style="width:57%;background:#60a5fa"></div></div>
+        <div class="card-pct">57%</div>
+      </div>
+      <div class="card" style="--c:#f59e0b">
+        <div class="card-label">Context Precision</div>
+        <div class="card-score">0.676</div>
+        <div class="bar-track"><div class="bar-fill" style="width:68%;background:#f59e0b"></div></div>
+        <div class="card-pct">68%</div>
+      </div>
+      <div class="card" style="--c:#c084fc">
+        <div class="card-label">Context Recall</div>
+        <div class="card-score">0.722</div>
+        <div class="bar-track"><div class="bar-fill" style="width:72%;background:#c084fc"></div></div>
+        <div class="card-pct">72%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-title">Metrics Overview</div>
+    <div class="chart-panel"><canvas id="rc"></canvas></div>
+  </div>
+
+  <div class="section">
+    <div class="sec-title">Per-Sample Results (15 samples)</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Question</th>
+            <th>Generated Answer</th>
+            <th>Ground Truth</th>
+            <th style="color:#4ade80">Faithfulness</th><th style="color:#60a5fa">Answer Relevancy</th><th style="color:#f59e0b">Context Precision</th><th style="color:#c084fc">Context Recall</th>
+            <th>Contexts</th>
+          </tr>
+        </thead>
+        <tbody>
+      <tr>
+        <td class="num">1</td>
+        <td class="q-cell">What if I fail to latch the tailgate properly?</td>
+        <td class="ans-cell">Failure to securely latch the tailgate could result in damage to the vehicle or cargo.</td>
+        <td class="gt-cell">If you fail to securely latch the tailgate properly, it could result in damage to the vehicle or cargo.</td>
+        <td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td><td><span class="badge" style="background:#4ade80;color:#000">0.84</span></td><td><span class="badge" style="background:#4ade80;color:#000">0.81</span></td><td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td>
+        <td>
+          <button class="toggle" onclick="tog(this)">&#9654; Show</button>
+          <ul class="ctx-list" hidden><li class="ctx-item">.  Make sure an audible “click” from both sides of the Tonneau Cover is heard to confirm that the latch is completely engaged.  Push downward to lock note: if desired, the tonneau cover can be left in this position (rear panel folded forwar…</li><li class="ctx-item">.  Secure the tailgate in this position by looping the tailgate straps behind the circular retainer on both sides.  Ensure the tailgate strap is properly seated behind the circular retainer against the sides of the sheet metal</li><li class="ctx-item">.  The maximum payload for the mid position is 300 lb (136 kg).  Closing To close the tailgate, lift upward until both sides latch into place.  CAUTION: After closing, pull back on the tailgate firmly to ensure it is securely latched.  Fail…</li><li class="ctx-item">.  Note: if not leaving the tailgate in the mid-position, the tonneau cover must be closed completely prior to fully closing the tailgate.  CAUTION: Do not sit on the Tonneau Cover; damage to the cover and/or cargo will occur.</li><li class="ctx-item">.  Due to the presence of the Center High-Mounted Stop Lamp, removal of the tailgate is not recommended.</li></ul>
+        </td>
+      </tr>
+      <tr>
+        <td class="num">2</td>
+        <td class="q-cell">What kind of safety features are implemented in this car?</td>
+        <td class="ans-cell">The context mentions that some of the most important safety features in the vehicle are the "restraint systems". Additionally, it also mentions a "Vehicle Security system" that monitors the vehicle doors and ignition switch for unauthorized entry and operation, providing audible and visible signals.…</td>
+        <td class="gt-cell">The car has occupant restraint systems as its main safety feature. It also has safety settings accessible through the Safety/Driving Assistance button on the touchscreen, which may vary depending on the features equipped on the vehicle.</td>
+        <td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td><td><span class="badge" style="background:#4ade80;color:#000">0.85</span></td><td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td><td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td>
+        <td>
+          <button class="toggle" onclick="tog(this)">&#9654; Show</button>
+          <ul class="ctx-list" hidden><li class="ctx-item">.  Some of the most important safety features in your vehicle are the restraint systems:</li><li class="ctx-item">Some of the most important safety features in your vehicle are the restraint systems: ALWAYS obey traffic laws and pay attention to the road.  ALWAYS drive safely with your hands on the steering wheel.  You have full responsibility and assu…</li><li class="ctx-item">VEHICLE SECURITY SYSTEM — IF EQUIPPED The Vehicle Security system monitors the vehicle doors for unauthorized entry and the ignition switch for unauthorized operation.  When the system is activated, the interior switches for door locks are …</li><li class="ctx-item">STARTING THE ENGINE — GASOLINE ENGINE (IF EQUIPPED) Before starting your vehicle, adjust your seat, adjust both inside and outside mirrors, and fasten your seat belts.  WARNING: When exiting the vehicle, always remove the key fob from the i…</li><li class="ctx-item">STARTING THE ENGINE — GASOLINE ENGINE (IF EQUIPPED) Before starting your vehicle, adjust your seat, adjust both inside and outside mirrors, and fasten your seat belts.  WARNING: When exiting the vehicle, always remove the key fob from the i…</li></ul>
+        </td>
+      </tr>
+      <tr>
+        <td class="num">3</td>
+        <td class="q-cell">When will the Automatic SOS be triggered?</td>
+        <td class="ans-cell">The context does not provide enough information to determine when the Automatic SOS will be triggered. The context only explains how the SOS Call system works, its limitations, and what happens when it is activated, but it does not specify the conditions under which the Automatic SOS is triggered.</td>
+        <td class="gt-cell">The Automatic SOS will be triggered in the event that your vehicle's airbags deploy.</td>
+        <td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td><td><span class="badge" style="background:#f87171;color:#000">0.00</span></td><td><span class="badge" style="background:#f87171;color:#000">0.00</span></td><td><span class="badge" style="background:#f87171;color:#000">0.00</span></td>
+        <td>
+          <button class="toggle" onclick="tog(this)">&#9654; Show</button>
+          <ul class="ctx-list" hidden><li class="ctx-item">.  Once the SOS operator opens a voice connection with the vehicle’s SOS Call system, the operator should be able to speak with the vehicle occupants, and hear sounds occurring in the vehicle.  The vehicle’s SOS Call system will attempt to …</li><li class="ctx-item">Sos call system limitations vehicles sold in mexico do not have sos call system capabilities.  SOS or other emergency line operators in Mexico may not answer or respond to SOS system calls.  If the SOS Call system detects a malfunction, any…</li><li class="ctx-item">.  The LED light located within the ASSIST and SOS buttons on the overhead console will turn green once a connection to an SOS operator has been made.  Once a connection between the vehicle and an sos operator is made, the sos call system m…</li><li class="ctx-item">.  Failure to do so may result in an accident involving serious injury or death.  Note: your vehicle may be transmitting data as authorized by the subscriber.  Once a connection is made between the vehicle’s SOS Call system and the SOS oper…</li><li class="ctx-item">.  If the Rearview Mirror light is illuminated, have an authorized dealer service the SOS Call system immediately.  The Occupant Restraint Control module turns on the Air Bag Warning Light on the instrument panel if a malfunction in any par…</li></ul>
+        </td>
+      </tr>
+      <tr>
+        <td class="num">4</td>
+        <td class="q-cell">What happens if I accidentally push the SOS Call button?</td>
+        <td class="ans-cell">If you accidentally push the SOS Call button, you have 10 seconds to cancel the call. To cancel, either push the SOS Call button again or press the Cancel button on the in-vehicle touchscreen (or Device Screen). This will prevent a call from being made to an SOS operator.</td>
+        <td class="gt-cell">If you accidentally push the SOS Call button, you have 10 seconds to cancel the call by either pushing the SOS Call button again or pressing the Cancel button on the in-vehicle touchscreen. If the call is not canceled within 10 seconds, the…</td>
+        <td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td><td><span class="badge" style="background:#f59e0b;color:#000">0.71</span></td><td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td><td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td>
+        <td>
+          <button class="toggle" onclick="tog(this)">&#9654; Show</button>
+          <ul class="ctx-list" hidden><li class="ctx-item">Connected Services SOS FAQs — If Equipped What happens if I accidentally push the SOS Call button on the mirror or overhead console?  You have 10 seconds after pushing the SOS Call button to cancel the call.  To cancel the call, either push…</li><li class="ctx-item">SOS Call Push the SOS Call button on the overhead console.  Note: in case the sos call button is pushed in error, there will be a 10 second delay before the sos call system initiates a call to an sos operator.  To cancel the SOS Call connec…</li><li class="ctx-item">.  Failure to do so may result in an accident involving serious injury or death.  Note: your vehicle may be transmitting data as authorized by the subscriber.  Once a connection is made between the vehicle’s SOS Call system and the SOS oper…</li><li class="ctx-item">.  What type of information is sent when I use the SOS Call button from my vehicle?  Certain vehicle information, such as make and model, is transmitted along with the last known GPS location.  When could I use the SOS Call button?  You can…</li><li class="ctx-item">Sos call system limitations vehicles sold in mexico do not have sos call system capabilities.  SOS or other emergency line operators in Mexico may not answer or respond to SOS system calls.  If the SOS Call system detects a malfunction, any…</li></ul>
+        </td>
+      </tr>
+      <tr>
+        <td class="num">5</td>
+        <td class="q-cell">What is the DEF?</td>
+        <td class="ans-cell">Diesel Exhaust Fluid. For the 3.0L Diesel Engine, Mopar® Diesel Exhaust Fluid (DEF) (API Certified) or equivalent that has been API Certified to the ISO 22241 standard is recommended.</td>
+        <td class="gt-cell">The DEF stands for Diesel Exhaust Fluid.</td>
+        <td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td><td><span class="badge" style="background:#f87171;color:#000">0.17</span></td><td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td><td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td>
+        <td>
+          <button class="toggle" onclick="tog(this)">&#9654; Show</button>
+          <ul class="ctx-list" hidden><li class="ctx-item">.  Diesel Exhaust Fluid — 3.0L Diesel Engine Mopar® Diesel Exhaust Fluid (DEF)(API Certified) or equivalent that has been API Certified to the ISO 22241 standard.  Use of fluids not API Certified to ISO 22241 may result in system damage.  O…</li><li class="ctx-item">.  Diesel Exhaust Fluid — 3.0L Diesel Engine Mopar® Diesel Exhaust Fluid (DEF)(API Certified) or equivalent that has been API Certified to the ISO 22241 standard.  Use of fluids not API Certified to ISO 22241 may result in system damage.  T…</li><li class="ctx-item">.  Example: dot ma l9 abcd 0301 dot = department of transportation this symbol certifies that the tire is in compliance with the us department of transportation tire safety standards and is approved for highway use ma = code representing th…</li><li class="ctx-item">.  N (Neutral) N (Neutral) — This range disengages both the front and rear driveshafts from the powertrain.  To be used for flat towing behind another vehicle.</li><li class="ctx-item">For the recommended viscosity and quality grades seeThe Treadwear grade is a comparative rating, based on the wear rate of the tire when tested under controlled conditions on a specified government test course.  For example, a tire graded 1…</li></ul>
+        </td>
+      </tr>
+      <tr>
+        <td class="num">6</td>
+        <td class="q-cell">What may cause erratic or noisy performance of the radio?</td>
+        <td class="ans-cell">The mobile phone being on in your vehicle may cause erratic or noisy performance from your radio, and this condition may be lessened or eliminated by repositioning the mobile phone within the vehicle.</td>
+        <td class="gt-cell">The erratic or noisy performance of the radio may be caused by the mobile phone being on in the vehicle, jamming due to electronic devices or driving next to facilities emitting the same frequencies as TPMS sensors, aftermarket window tinti…</td>
+        <td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td><td><span class="badge" style="background:#f59e0b;color:#000">0.73</span></td><td><span class="badge" style="background:#f87171;color:#000">0.50</span></td><td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td>
+        <td>
+          <button class="toggle" onclick="tog(this)">&#9654; Show</button>
+          <ul class="ctx-list" hidden><li class="ctx-item">Under certain conditions, the mobile phone being on in your vehicle can cause erratic or noisy performance from your radio.  This condition may be lessened or eliminated by repositioning the mobile phone within the vehicle.  This condition …</li><li class="ctx-item">.  Jamming due to electronic devices or driving next to facilities emitting the same radio frequencies as the TPMS sensors.  Installing some form of aftermarket window tinting that affects radio wave signals.  Lots of snow or ice around the…</li><li class="ctx-item">.  Therefore, if the volume control on the Auxiliary device is set too low, there will be insufficient audio signal for the radio unit to play the music on the device.</li><li class="ctx-item">US/CANADA Exposure to Radio Frequency Radiation The radiated output power of the internal wireless radio is far below the FCC and IC radio frequency exposure limits.  Nevertheless, the wireless radio will be used in such a manner that the r…</li><li class="ctx-item">.  The radio manufacturer believes the internal wireless radio is safe for use by consumers.  The level of energy emitted is far less than the electromagnetic energy emitted by wireless devices such as mobile phones.  However, the use of wi…</li></ul>
+        </td>
+      </tr>
+      <tr>
+        <td class="num">7</td>
+        <td class="q-cell">how to calculate the gross trailer weight?</td>
+        <td class="ans-cell">To calculate the Gross Trailer Weight (GTW), put your fully loaded trailer on a vehicle scale, ensuring the entire weight of the trailer is supported by the scale. The GTW is the weight of the trailer plus the weight of all cargo, consumables, and equipment (permanent or temporary) loaded in or on t…</td>
+        <td class="gt-cell">To calculate the gross trailer weight (GTW), the recommended way is to put your fully loaded trailer on a vehicle scale where the entire weight of the trailer must be supported by the scale. The GTW is the weight of the trailer plus the wei…</td>
+        <td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td><td><span class="badge" style="background:#4ade80;color:#000">0.93</span></td><td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td><td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td>
+        <td>
+          <button class="toggle" onclick="tog(this)">&#9654; Show</button>
+          <ul class="ctx-list" hidden><li class="ctx-item">.  Contact an authorized dealer for service Gross Trailer Weight (GTW) The GTW is the weight of the trailer plus the weight of all cargo, consumables and equipment (permanent or temporary) loaded in or on the trailer in its "loaded and read…</li><li class="ctx-item">Gross Trailer Weight (GTW) The GTW is the weight of the trailer plus the weight of all cargo, consumables and equipment (permanent or temporary) loaded in or on the trailer in its "loaded and ready for operation" condition.  The recommended…</li><li class="ctx-item">.  Consider the following items when computing the weight on the rear axle of the vehicle: the tongue weight of the trailer the weight of any other type of cargo or equipment put in or on your vehicle the weight of the driver and all passen…</li><li class="ctx-item">The recommended way to measure GTW is to put your fully loaded trailer on a vehicle scale.  The entire weight of the trailer must be supported by the scale.  The GTW is the weight of the trailer plus the weight of all cargo, consumables and…</li><li class="ctx-item">.  WARNING: If the gross trailer weight is 2,000 lb (907 kg) or more, it is recommended to use a weight-distributing hitch to ensure stable handling of your vehicle.  If you use a standard weight-carrying hitch, you could lose control of yo…</li></ul>
+        </td>
+      </tr>
+      <tr>
+        <td class="num">8</td>
+        <td class="q-cell">What can the ASIST button do?</td>
+        <td class="ans-cell">The ASSIST button is used to automatically connect you to a support center. No further details are provided about the specific functions or services offered by the support center.</td>
+        <td class="gt-cell">The ASSIST button can be used for contacting Roadside Assistance, Vehicle Care, Uconnect Care, and SiriusXM Guardian™ Customer Care.</td>
+        <td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td><td><span class="badge" style="background:#f87171;color:#000">0.00</span></td><td><span class="badge" style="background:#f87171;color:#000">0.50</span></td><td><span class="badge" style="background:#f87171;color:#000">0.00</span></td>
+        <td>
+          <button class="toggle" onclick="tog(this)">&#9654; Show</button>
+          <ul class="ctx-list" hidden><li class="ctx-item">.  For further information about the ASSIST and SOS buttons The ASSIST button is used to automatically connect you to any one of the following support centers: 1 — Assist Button 2 — SOS Button If equipped, vehicles with an ASSIST and an SOS…</li><li class="ctx-item">.  If equipped, vehicles with an ASSIST and an SOS button are connected vehicles.  These buttons will be located on either the rearview mirror or overhead console, depending on the vehicle.  If these buttons are present in your vehicle, you…</li><li class="ctx-item">A/C Button Press and release this button on the touchscreen, or push the button on the faceplate to change the current setting.  The A/C indicator illuminates when A/C is ON.  The Air Conditioning (A/C) button allows the operator to manuall…</li><li class="ctx-item">The Air Conditioning (A/C) button allows the operator to manually activate or deactivate the air conditioning system.  When the air conditioning system is turned on, cool dehumidified air will flow through the outlets into the cabin.  If th…</li><li class="ctx-item">UCONNECT SETTINGS The Uconnect system uses a combination of buttons on the touchscreen and buttons on the faceplate located on the center of the instrument panel.  These buttons allow you to access and change the Customer Programmable Featu…</li></ul>
+        </td>
+      </tr>
+      <tr>
+        <td class="num">9</td>
+        <td class="q-cell">What does the Door Off Mirror Kit do?</td>
+        <td class="ans-cell">The Door Off Mirror Kit allows exterior rearview mirrors to be installed on the upper body door hinges after the front doors have been removed.</td>
+        <td class="gt-cell">The Door Off Mirror Kit allows exterior rearview mirrors to be installed on the upper body door hinges after the front doors have been removed.</td>
+        <td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td><td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td><td><span class="badge" style="background:#f87171;color:#000">0.33</span></td><td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td>
+        <td>
+          <button class="toggle" onclick="tog(this)">&#9654; Show</button>
+          <ul class="ctx-list" hidden><li class="ctx-item">.  This vehicle may be equipped with half-doors.  To install the half-doors in the vehicle, follow the instruction sheet packaged in the box the doors were received in.  Replacement parts may be purchased through Mopar® Service.  To install…</li><li class="ctx-item">Front door removal front door removal ¹ use this qr code to access your digital experience.  Outside rearview mirrors are mounted on the doors.  If you choose to remove the doors, see an authorized dealer for a replacement cowl-mounted outs…</li><li class="ctx-item">The rearview mirror can be adjusted up, down, left, and right.  The mirror should be adjusted to center on the view through the rear window.  If equipped with the Door Off Mirror Kit, exterior rearview mirrors can be installed on to the upp…</li><li class="ctx-item">.  Federal law requires outside mirrors on vehicles for on-road use.</li><li class="ctx-item">.  CAUTION: To avoid damage to the mirror during cleaning, never spray any cleaning solution directly onto the mirror.  Apply the solution onto a clean cloth and wipe the mirror clean.  Automatic High Beam Headlamp Control — If Equipped The…</li></ul>
+        </td>
+      </tr>
+      <tr>
+        <td class="num">10</td>
+        <td class="q-cell">Can I manually activate or deactivate the air conditioner?</td>
+        <td class="ans-cell">Yes, you can manually activate or deactivate the air conditioning system using the Air Conditioning (A/C) button.</td>
+        <td class="gt-cell">Yes, you can manually activate or deactivate the air conditioning system by pressing the A/C button on the touchscreen or pushing the button on the faceplate. The A/C indicator illuminates when the A/C is on.</td>
+        <td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td><td><span class="badge" style="background:#f59e0b;color:#000">0.56</span></td><td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td><td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td>
+        <td>
+          <button class="toggle" onclick="tog(this)">&#9654; Show</button>
+          <ul class="ctx-list" hidden><li class="ctx-item">A/C Button Press and release this button on the touchscreen, or push the button on the faceplate to change the current setting.  The A/C indicator illuminates when A/C is ON.  The Air Conditioning (A/C) button allows the operator to manuall…</li><li class="ctx-item">The Air Conditioning (A/C) button allows the operator to manually activate or deactivate the air conditioning system.  When the air conditioning system is turned on, cool dehumidified air will flow through the outlets into the cabin.  If th…</li><li class="ctx-item">A/C Button Push the A/C button to engage the Air Conditioning (A/C).  The A/C indicator illuminates when A/C is on.  Note: For Manual Climate Controls, if the system is in Mix, Floor or Defrost Mode, the A/C can be turned off, but the A/C s…</li><li class="ctx-item">.  CAUTION: Driving with a hot cooling system could damage your vehicle.  If the temperature gauge reads “H,” pull over and stop the vehicle.  Idle the vehicle with the air conditioner turned off until the pointer drops back into the normal…</li><li class="ctx-item">.  CAUTION: Driving with a hot cooling system could damage your vehicle.  If the temperature gauge reads “H,” pull over and stop the vehicle.  Idle the vehicle with the air conditioner turned off until the pointer drops back into the normal…</li></ul>
+        </td>
+      </tr>
+      <tr>
+        <td class="num">11</td>
+        <td class="q-cell">what does the The cartridge block heater do?</td>
+        <td class="ans-cell">The cartridge block heater transfers heat to the coolant. It clips into the engine block near the water jacket.</td>
+        <td class="gt-cell">The cartridge block heater clips into the engine block near the water jacket and transfers heat to the coolant.</td>
+        <td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td><td><span class="badge" style="background:#4ade80;color:#000">0.96</span></td><td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td><td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td>
+        <td>
+          <button class="toggle" onclick="tog(this)">&#9654; Show</button>
+          <ul class="ctx-list" hidden><li class="ctx-item">The cartridge block heater clips into the engine block near the water jacket and transfers heat to the coolant.  It requires a 110–115 Volt AC electrical outlet with a grounded, three-wire extension cord.  Its use is recommended for environ…</li><li class="ctx-item">.  This allows the heater core to act as a supplement to the radiator and aids in removing heat from the engine cooling system.  WARNING: You or others can be badly burned by hot engine coolant (antifreeze) or steam from your radiator.  If …</li><li class="ctx-item">.  This allows the heater core to act as a supplement to the radiator and aids in removing heat from the engine cooling system.  WARNING: You or others can be badly burned by hot engine coolant (antifreeze) or steam from your radiator.  If …</li><li class="ctx-item">.  This allows the heater core to act as a supplement to the radiator and aids in removing heat from the engine cooling system.  WARNING: You or others can be badly burned by hot engine coolant (antifreeze) or steam from your radiator.  If …</li><li class="ctx-item">.  This allows the heater core to act as a supplement to the radiator and aids in removing heat from the engine cooling system.  WARNING: You or others can be badly burned by hot engine coolant (antifreeze) or steam from your radiator.  If …</li></ul>
+        </td>
+      </tr>
+      <tr>
+        <td class="num">12</td>
+        <td class="q-cell">When will the illuminated entry system be activated?</td>
+        <td class="ans-cell">The context does not contain information about the illuminated entry system. Therefore, I cannot provide an answer based on the provided context.</td>
+        <td class="gt-cell">The illuminated entry system will be activated when the Passive Entry system unlocks the vehicle. This happens when a valid Passive Entry key fob is detected and the vehicle is unlocked without having to push the key fob lock or unlock butt…</td>
+        <td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td><td><span class="badge" style="background:#f87171;color:#000">0.00</span></td><td><span class="badge" style="background:#f87171;color:#000">0.00</span></td><td><span class="badge" style="background:#f87171;color:#000">0.00</span></td>
+        <td>
+          <button class="toggle" onclick="tog(this)">&#9654; Show</button>
+          <ul class="ctx-list" hidden><li class="ctx-item">Off Road+ Indicator Light — If Equipped This indicator light will illuminate when Off Road+ has been activated.</li><li class="ctx-item">.  When the system is activated, the interior switches for door locks are disabled.  The Vehicle Security system provides both audible and visible signals.  If something triggers the alarm, the Vehicle Security system will provide the follo…</li><li class="ctx-item">.  If the light does not illuminate, have the light inspected by an authorized dealer.  When the parking brake is applied with the ignition switch ON, the Brake Warning Light in the instrument cluster will illuminate.  If the headlights or …</li><li class="ctx-item">.  Note: The doors have to be open and then closed in order for the vehicle to check for the presence of a key fob; the Key Left Vehicle feature will not activate until all of the doors are closed.  These alerts will not be activated in sit…</li><li class="ctx-item">.  The Air Bag Warning Light remains on after the four to eight-second interval.  The Air Bag Warning Light comes on intermittently or remains on while driving.  This warning light will indicate when the Electronic Stability Control system …</li></ul>
+        </td>
+      </tr>
+      <tr>
+        <td class="num">13</td>
+        <td class="q-cell">If the light remains on after the bulb check, it indicates what problem?</td>
+        <td class="ans-cell">If the light remains on after the bulb check, it indicates that there is a problem with the electronics.</td>
+        <td class="gt-cell">If the Brake Warning Light remains on after the bulb check, it indicates a possible brake hydraulic system malfunction or a problem with the Brake Booster detected by the Anti-Lock Brake System (ABS) / Electronic Stability Control (ESC) sys…</td>
+        <td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td><td><span class="badge" style="background:#4ade80;color:#000">0.91</span></td><td><span class="badge" style="background:#f87171;color:#000">0.00</span></td><td><span class="badge" style="background:#f87171;color:#000">0.00</span></td>
+        <td>
+          <button class="toggle" onclick="tog(this)">&#9654; Show</button>
+          <ul class="ctx-list" hidden><li class="ctx-item">.  After placing the ignition switch in the ON/RUN position, the Vehicle Security Light will turn on for three seconds for a bulb check.  If the light remains on after the bulb check, it indicates that there is a problem with the electronic…</li><li class="ctx-item">.  If the bulb does not come on when turning the ignition switch from OFF to ON/RUN, have the condition checked promptly.  Certain conditions, such as a loose or missing gas cap, poor quality fuel, etc., may illuminate the light after engin…</li><li class="ctx-item">.  If you crank or start the engine, you will have to start this test over.  As soon as you cycle the ignition switch to the ON position, you will see the Malfunction Indicator Light (MIL) symbol come on as part of a normal bulb check.  App…</li><li class="ctx-item">.  If you crank or start the engine, you will have to start this test over.  As soon as you cycle the ignition switch to the ON position, you will see the Malfunction Indicator Light (MIL) symbol come on as part of a normal bulb check.  App…</li><li class="ctx-item">.  Note: if you crank or start the engine, you will have to start this test over.  As soon as you cycle the ignition switch to the ON position, you will see the Malfunction Indicator Light (MIL) symbol come on as part of a normal bulb check…</li></ul>
+        </td>
+      </tr>
+      <tr>
+        <td class="num">14</td>
+        <td class="q-cell">What is special about power windows?</td>
+        <td class="ans-cell">The power windows have an Auto-Down feature on the driver and front passenger door switches, allowing the window to go down automatically when the switch is pushed down past the detent and released. Additionally, the power windows can be operated with the push of a button, and the switches remain ac…</td>
+        <td class="gt-cell">Power windows have an Auto-Down feature where the window will go down automatically if the window switch is pushed down past the detent and released.</td>
+        <td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td><td><span class="badge" style="background:#4ade80;color:#000">0.85</span></td><td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td><td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td>
+        <td>
+          <button class="toggle" onclick="tog(this)">&#9654; Show</button>
+          <ul class="ctx-list" hidden><li class="ctx-item">The power windows feature allows for movement of the windows with the push of a button.  The power window switches are located on the instrument panel below the climate controls.  Push the switch downward to open the window and pull upward …</li><li class="ctx-item">.  Extended use of this mode is not recommended.  Recirculation mode may automatically adjust to optimize customer experience for warming, cooling, dehumidification, etc.  POWER WINDOWS — IF EQUIPPED The power windows feature allows for mov…</li><li class="ctx-item">.  A child could operate power windows, other controls, or move the vehicle.</li><li class="ctx-item">.  Occupants, particularly unattended children, can become entrapped by the windows while operating the power window switches.  Such entrapment may result in serious injury or death.  Note: The power window switches will remain active for u…</li><li class="ctx-item">.  Power Window Switches Never leave children unattended in a vehicle, and do not let children play with power windows.  Do not leave the key fob in or near the vehicle, or in a location accessible to children.  Occupants, particularly unat…</li></ul>
+        </td>
+      </tr>
+      <tr>
+        <td class="num">15</td>
+        <td class="q-cell">What should I do to jump start the car?</td>
+        <td class="ans-cell">To jump start the car:
+
+1. Park the vehicle with the good battery within jumper cable's reach, apply the parking brake, and make sure the ignition is OFF.
+2. Turn off the heater, radio, and all electrical accessories in both vehicles.
+3. Locate the main battery (in the right rear of the engine compa…</td>
+        <td class="gt-cell">To jump start the car, you should follow these steps:
+
+- Prepare for jump starting by applying the parking brake, shifting the transmission into PARK or NEUTRAL, turning off the ignition, and all electrical accessories.
+- Make sure the vehi…</td>
+        <td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td><td><span class="badge" style="background:#f87171;color:#000">0.00</span></td><td><span class="badge" style="background:#4ade80;color:#000">1.00</span></td><td><span class="badge" style="background:#4ade80;color:#000">0.83</span></td>
+        <td>
+          <button class="toggle" onclick="tog(this)">&#9654; Show</button>
+          <ul class="ctx-list" hidden><li class="ctx-item">.  Turn off the heater, radio, and all electrical accessories.  If using another vehicle to jump start the battery, park the vehicle within the jumper cable’s reach, apply the parking brake and make sure the ignition is OFF.  WARNING: Only …</li><li class="ctx-item">Preparations For Jump Start The battery in your vehicle is located in the right rear of the engine compartment.  If your vehicle is equipped with a Stop/Start system, it will be equipped with two batteries See the following steps to prepare…</li><li class="ctx-item">.  If your vehicle has a discharged battery, it can be jump started using a set of jumper cables and a battery in another vehicle, or by using a portable battery booster pack.  Jump starting can be dangerous if done improperly, so please fo…</li><li class="ctx-item">.  Release the parking brake.  The transmission must be in PARK or NEUTRAL.  Press and hold the brake pedal while pushing the ENGINE START/STOP button once.  The system starts the vehicle.  If the vehicle fails to start, the starter will di…</li><li class="ctx-item">.  Leave the ignition key in the ON/ RUN position, release the accelerator pedal and repeat the “Normal Starting” procedure.  WARNING: Never pour fuel or other flammable liquid into the throttle body air inlet opening in an attempt to start…</li></ul>
+        </td>
+      </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  Powered by <strong>RAGAs</strong> &nbsp;·&nbsp; Model: <code>groq/meta-llama/llama-4-scout-17b-16e-instruct</code>
+</footer>
+
+<script>
+function tog(btn) {
+  var ul = btn.nextElementSibling;
+  var show = ul.hidden;
+  ul.hidden = !show;
+  btn.innerHTML = show ? '&#9660; Hide' : '&#9654; Show';
+}
+
+new Chart(document.getElementById('rc'), {
+  type: 'radar',
+  data: {
+    labels: ["Faithfulness", "Answer Relevancy", "Context Precision", "Context Recall"],
+    datasets: [{
+      label: 'Score',
+      data: [1.0, 0.5661, 0.6759, 0.7222],
+      backgroundColor: 'rgba(124,58,237,.12)',
+      borderColor: '#7c3aed',
+      borderWidth: 2.5,
+      pointBackgroundColor: ["#4ade80", "#60a5fa", "#f59e0b", "#c084fc"],
+      pointBorderColor: '#0d1117',
+      pointBorderWidth: 2,
+      pointRadius: 6,
+      pointHoverRadius: 8,
+    }]
+  },
+  options: {
+    responsive: true,
+    scales: {
+      r: {
+        min: 0,
+        max: 1,
+        ticks: {
+          stepSize: 0.25,
+          color: '#8b949e',
+          backdropColor: 'transparent',
+          font: { size: 11 }
+        },
+        grid: { color: '#21262d' },
+        pointLabels: { color: '#c9d1d9', font: { size: 12, weight: '700' } },
+        angleLines: { color: '#30363d' },
+      }
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#161b22',
+        borderColor: '#30363d',
+        borderWidth: 1,
+        callbacks: {
+          label: function(ctx) { return '  ' + ctx.parsed.r.toFixed(3); }
+        }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>
