@@ -153,12 +153,3 @@ This project demonstrates:
 - Experiment tracking across multiple chatbot versions
 - Production-relevant reporting via JSON and HTML outputs
 
-## Future Improvements
-
-- Add query rewriting for ambiguous or underspecified questions.
-- Add reranking after RRF to improve context precision.
-- Expand the eval sample size beyond 15 examples.
-- Track cost, latency, and token usage per version.
-- Add CI-style regression checks for RAG quality gates.
-- Compare multiple embedding models and chunking strategies.
-
