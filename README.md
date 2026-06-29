@@ -4,6 +4,10 @@
 
 The chatbot answers questions from retrieved context only. The current version uses a hybrid retriever that combines dense semantic search with BM25 keyword search, then blends both rankings with Reciprocal Rank Fusion (RRF).
 
+## Project Demo
+<video src="./assets/RAG_with_Evals_GIF.mp4" width="100%" controls loop muted></video>
+
+
 ## Why This Project Exists
 
 RAG systems are easy to demo and hard to trust. A chatbot can sound fluent even when it retrieves weak context, ignores evidence, or produces unsupported answers. This project treats RAG quality as an engineering problem:
