@@ -5,7 +5,9 @@
 The chatbot answers questions from retrieved context only. The current version uses a hybrid retriever that combines dense semantic search with BM25 keyword search, then blends both rankings with Reciprocal Rank Fusion (RRF).
 
 ## Project Demo
-<video src="./assets/RAG_with_Evals_GIF.mp4" width="100%" controls loop muted></video>
+https://github.com/user-attachments/assets/1454ca4e-5ea5-46f5-92ed-a531f58af874
+
+
 
 
 ## Why This Project Exists
